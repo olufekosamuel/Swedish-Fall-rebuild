@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import image from '../../assets/images/swedish.png';
+import { Route, Link} from 'react-router-dom';
 class Footer extends Component{
     constructor(props){
         super(props);
@@ -18,7 +20,7 @@ class Footer extends Component{
 
         return(
 
-        <footer class="bg3 p-t-75 p-b-32">
+        <footer class="bg3 p-t-75 p-b-32" style={{background:`url(${image}) no-repeat`}}>
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-lg-3 p-b-50">
@@ -28,27 +30,27 @@ class Footer extends Component{
 
                         <ul>
                             <li class="p-b-10">
-                                <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                                    Women
-                                </a>
+                                <Link to="/shop/new" class="stext-107 cl7 hov-cl1 trans-04">
+                                   New
+                                </Link>
                             </li>
 
                             <li class="p-b-10">
-                                <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                                    Men
-                                </a>
+                                <Link to="/shop/bottoms" class="stext-107 cl7 hov-cl1 trans-04">
+                                    Bottom
+                                </Link>
                             </li>
 
                             <li class="p-b-10">
-                                <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                                    Shoes
-                                </a>
+                                <Link to="/shops/tops" class="stext-107 cl7 hov-cl1 trans-04">
+                                    Tops
+                                </Link>
                             </li>
 
                             <li class="p-b-10">
-                                <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                                    Watches
-                                </a>
+                                <Link href="#" class="stext-107 cl7 hov-cl1 trans-04">
+                                    Collections
+                                </Link>
                             </li>
                         </ul>
                     </div>
@@ -91,7 +93,7 @@ class Footer extends Component{
                         </h4>
 
                         <p class="stext-107 cl7 size-201">
-                            Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+                            Any questions? Let us know in store
                         </p>
 
                         <div class="p-t-27">
@@ -133,7 +135,7 @@ class Footer extends Component{
                     
 
                     <p class="stext-107 cl6 txt-center">
-                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This site is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a target="_blank" href="https://www.linkedin.com/in/olufekosamuel" target="_blank">Samuel Olufeko</a>
                       
 
                     </p>

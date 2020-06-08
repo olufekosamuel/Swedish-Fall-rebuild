@@ -267,10 +267,14 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 /*-----------------------------------------------*/
 .bannerhome{
   background-color: #d9d9d9;
-  min-height: 300px;
+  min-height: 700px;
   border-radius: 5px;
 }
 
+/*--------------------------------------------*/
+.StripeCheckout{
+  border-radius: 0px;
+}
 
 
 /*==================================================================
@@ -446,6 +450,12 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 .main-menu > li:hover > a {
   text-decoration: none;
   color: #6c7ae0;
+}
+
+.main-menu > li > .nav-active{
+  text-decoration: none;
+  color: #6c7ae0;
+  font-weight: bold;
 }
 
 .main-menu > li:hover > .sub-menu {
@@ -2060,7 +2070,23 @@ input.num-product::-webkit-inner-spin-button {
   transform: translateX(-50%);
 }
 
+.home2-btn {
+  font-size: 30px;
+  position: absolute;
+  bottom: 20px;
+  left: 10%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
 .block2-pic:hover .block2-btn {
+  bottom: 20px;
+}
+
+.home2-pic:hover .block2-btn {
   bottom: 20px;
 }
 
@@ -2646,7 +2672,7 @@ input.num-product::-webkit-inner-spin-button {
 ==================================================================*/
 .bg-none {background-color: transparent;}
 .bg0 {background-color: #fff;}
-.bg1 {background-color: #717fe0;}
+.bg1 {background-color: #eacbc6;}
 .bg2 {background-color: #e6e6e6;}
 .bg3 {background-color: #222;}
 .bg5 {background-color: rgba(0,0,0,0.5);}
@@ -2735,7 +2761,7 @@ input.num-product::-webkit-inner-spin-button {
 }
 
 .bor13 {
-  border: 1px solid #e6e6e6;
+  border: 1px solid #eacbc6;
   border-radius: 22px;
 }
 
@@ -3083,8 +3109,8 @@ input.num-product::-webkit-inner-spin-button {
 
 /*---------------------------------------------*/
 .hov-btn1:hover {
-  border-color: #222;
-  background-color: #222;
+  border-color: #eacbc6;
+  background-color: #eacbc6;
   color: #fff;
 }
 
@@ -3101,8 +3127,8 @@ input.num-product::-webkit-inner-spin-button {
 
 /*---------------------------------------------*/
 .hov-btn3:hover {
-  border-color: #717fe0;
-  background-color: #717fe0;
+  border-color: #eacbc6;
+  background-color: #eacbc6;
   color: #fff;
 }
 

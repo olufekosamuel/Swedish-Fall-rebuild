@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Link} from 'react-router-dom';
 import img1 from '../assets/images/product-01.jpg';
+import StripeButton from './stripebutton';
+import { addToCart, addQuantity, removeQuantity} from '../actions/cartActions';
 
 
 
@@ -11,11 +13,18 @@ class Checkout extends Component{
         
     }
 
-    logout(){
-        localStorage.removeItem('current_wallet');
-        localStorage.removeItem('userData');
-        window.location.href = '/';
+    handleSubmit(e){
+        e.preventDefault()
     }
+
+    clickRemove(id){
+       this.props.removeQuantity(id);
+    }
+
+    clickAdd = (id)=>{
+		this.props.addQuantity(id);
+	}
+    
 
     render(){
 
@@ -32,18 +41,18 @@ class Checkout extends Component{
                         <td class="column-3">$ {item.price}</td>
                         <td class="column-4">
                             <div class="wrap-num-product flex-w m-l-auto m-r-0">
-                                <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                <div onClick={()=>this.clickRemove(item.id)} class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
                                     <i class="fs-16 zmdi zmdi-minus"></i>
                                 </div>
 
                                 <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value={item.quantity}/>
 
-                                <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                <div onClick={()=>this.clickAdd(item.id)} class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                     <i class="fs-16 zmdi zmdi-plus"></i>
                                 </div>
                             </div>
                         </td>
-                        <td class="column-5">$ 36.00</td>
+                        <td class="column-5">$ {item.quantity * item.price}</td>
                     </tr>
                 )
             })) : (<></>)
@@ -63,9 +72,9 @@ class Checkout extends Component{
             </div>
         </div>
             
+        
 
-
-	<form class="bg0 p-t-75 p-b-85">
+	<form onSubmit={this.handleSubmit} class="bg0 p-t-75 p-b-85">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
@@ -79,7 +88,10 @@ class Checkout extends Component{
 									<th class="column-4">Quantity</th>
 									<th class="column-5">Total</th>
 								</tr>
-                                {addedItems}
+                                <tbody>
+                                    {addedItems}
+                                </tbody>
+                                
 
 								
 							</table>
@@ -116,7 +128,7 @@ class Checkout extends Component{
 
 							<div class="size-209">
 								<span class="mtext-110 cl2">
-									$79.65
+									${this.props.total}
 								</span>
 							</div>
 						</div>
@@ -133,35 +145,6 @@ class Checkout extends Component{
 									There are no shipping methods available. Please double check your address, or contact us if you need any help.
 								</p>
 								
-								<div class="p-t-15">
-									<span class="stext-112 cl8">
-										Calculate Shipping
-									</span>
-
-									<div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
-										<select class="js-select2" name="time">
-											<option>Select a country...</option>
-											<option>USA</option>
-											<option>UK</option>
-										</select>
-										<div class="dropDownSelect2"></div>
-									</div>
-
-									<div class="bor8 bg0 m-b-12">
-										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="State /  country"/>
-									</div>
-
-									<div class="bor8 bg0 m-b-22">
-										<input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="Postcode / Zip"/>
-									</div>
-									
-									<div class="flex-w">
-										<div class="flex-c-m stext-101 cl2 size-115 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer">
-											Update Totals
-										</div>
-									</div>
-										
-								</div>
 							</div>
 						</div>
 
@@ -174,14 +157,13 @@ class Checkout extends Component{
 
 							<div class="size-209 p-t-1">
 								<span class="mtext-110 cl2">
-									$79.65
+									${this.props.total}
 								</span>
 							</div>
 						</div>
 
-						<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-							Proceed to Checkout
-						</button>
+						
+                        <StripeButton  price={this.props.total} />
 					</div>
 				</div>
 			</div>
@@ -193,12 +175,18 @@ class Checkout extends Component{
 }
 
 
+const mapDispatchToProps= (dispatch)=>{
+    return{
+        removeQuantity: (id)=>{dispatch(removeQuantity(id))},
+        addQuantity: (id)=>{dispatch(addQuantity(id))}
+    }
+}
+
 
 const mapStateToProps = (state)=>{
-    console.log(state);
     return {
         items: state.addedItems,
         total: state.total
     }
 }
-export default connect(mapStateToProps)(Checkout);
+export default connect(mapStateToProps,mapDispatchToProps)(Checkout);

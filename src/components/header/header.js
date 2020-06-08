@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Route, Link} from 'react-router-dom';
-import logo from '../../assets/images/icons/logo-01.png';
+import { Route, NavLink,Link} from 'react-router-dom';
+import logo from '../../assets/images/icons/swed.png';
 import { connect } from 'react-redux';
 import Cart from '../cart';
 
@@ -43,22 +43,20 @@ class Header extends Component{
                         
                         
                         <Link to="/" className="logo">
-                            <img src={logo} alt="IMG-LOGO"/>
+                            <img style={{width:'20%',height: '50%'}} src={logo} alt="IMG-LOGO"/>
                         </Link>
     
                       
                         <div className="menu-desktop">
                             <ul className="main-menu">
-                                <li className="active-menu">
-                                    <Link to="/">Home</Link>
+                                
+    
+                                <li>
+                                    <NavLink to="/shop" activeClassName='nav-active'>Shop</NavLink>
                                 </li>
     
                                 <li>
-                                    <Link to="/shop">Shop</Link>
-                                </li>
-    
-                                <li>
-                                    <Link to="/contact">Contact</Link>
+                                    <NavLink to="/contact" activeClassName='nav-active'>Contact</NavLink>
                                 </li>
                             </ul>
                         </div>	

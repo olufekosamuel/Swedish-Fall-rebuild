@@ -25,9 +25,21 @@ class Contact extends Component{
     render(){
         
         return(
-            <>
-			<br/>
-			</>
+            <div className="container" style={{paddingBottom:"100px", paddingTop:"130px"}}>
+                <br/><br/>
+				<div className="p-b-10 text-center">
+					<h3 className="ltext-103 cl5">
+						Stay in touch
+					</h3>
+					<p>Get Breifings from us today</p><br/>
+					<button class="stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
+						Contact Us
+					</button>
+				</div>
+                <br/>
+                <br/>
+                <br/> 
+			</div>
         )
     }
 }

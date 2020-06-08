@@ -36,7 +36,7 @@ class Cart extends Component{
                         </div>
                     </li>
                 )
-            })): <p>Empty</p>
+            })): <div class="header-cart-total w-full p-tb-40">Your cart is empty</div>
         return( 
             
         <div className={ this.props.show ? 'wrap-header-cart js-panel-cart show-header-cart ' : 'wrap-header-cart js-panel-cart' }>
@@ -86,6 +86,7 @@ const mapStateToProps = (state)=>{
         total: state.total
     }
 }
+
 
 export default connect(mapStateToProps)(Cart);
 

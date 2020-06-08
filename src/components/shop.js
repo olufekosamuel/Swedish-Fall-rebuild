@@ -1,24 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route} from 'react-router-dom';
-import img1 from '../assets/images/product-01.jpg';
-import img2 from '../assets/images/product-02.jpg';
-import img3 from '../assets/images/product-03.jpg';
-import img4 from '../assets/images/product-04.jpg';
-import img5 from '../assets/images/product-05.jpg';
-import img6 from '../assets/images/product-06.jpg';
-import img7 from '../assets/images/product-07.jpg';
-import img8 from '../assets/images/product-08.jpg';
+import { Route, Link, Switch} from 'react-router-dom';
+import Loader from 'react-loader-spinner'
+import icon1 from '../assets/images/icons/icon-heart-01.png';
+import icon2 from '../assets/images/icons/icon-heart-02.png';
 
+import New from './shop/new';
+import Top from './shop/top';
+import Bottom from './shop/bottom';
+import All from './shop/all';
 
 import { addToCart } from '../actions/cartActions';
+import NavBar from './navbar';
+
 
 
 class Shop extends Component{
 
+
+	constructor(props){
+        super(props)
+        this.state = {
+          showspinner: true
+        }
+      }
+    
+   
+
     componentDidMount() {
-        console.log(this.props.item);
+        setTimeout(()=>{this.setState({showspinner:false}) },2000)
     }
+    
 
     logout(){
         localStorage.removeItem('current_wallet');
@@ -26,45 +38,9 @@ class Shop extends Component{
         window.location.href = '/';
 	}
 	
-	handleClick = (id)=>{
-		this.props.addToCart(id);
-	}
 
     render(){
-        let itemList = this.props.items.map(item=>{
-			return(
-				<div key={item.id} className="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
-					<div className="block2">
-						<div className="block2-pic hov-img0">
-							<img src={item.img} alt="IMG-PRODUCT"/>
-
-							<button  onClick={()=>{this.handleClick(item.id)}} className="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-								Add to cart
-							</button>
-						</div>
-
-						<div className="block2-txt flex-w flex-t p-t-14">
-							<div className="block2-txt-child1 flex-col-l ">
-								<a href="product-detail.html" className="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-									{item.name}
-								</a>
-
-								<span className="stext-105 cl3">
-									${item.price}
-								</span>
-							</div>
-
-							<div className="block2-txt-child2 flex-r p-t-3">
-								<a href="#" className="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-									<img className="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON"/>
-									<img className="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON"/>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			)
-		})
+        
         return(
             <>
 			<br/>
@@ -77,32 +53,7 @@ class Shop extends Component{
 			</div>
 
 			<div className="flex-w flex-sb-m p-b-52">
-				<div className="flex-w flex-l-m filter-tope-group m-tb-10">
-					<button className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
-						All Products
-					</button>
-
-					<button className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
-						Women
-					</button>
-
-					<button className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
-						Men
-					</button>
-
-					<button className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
-						Bag
-					</button>
-
-					<button className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes">
-						Shoes
-					</button>
-
-					<button className="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
-						Watches
-					</button>
-				</div>
-
+				<NavBar/>
 				<div className="flex-w flex-c-m m-tb-10">
 					<div className="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
 						<i className="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
@@ -319,7 +270,22 @@ class Shop extends Component{
 			</div>
 
 			<div className="row isotope-grid">
-				{itemList}
+
+			{this.state.showspinner ? <div className="container"> <div className="text-center"> <Loader
+				type="TailSpin"
+				color="#eacbc6"
+				height={100}
+				width={100}
+				timeout={2000} />
+				
+			</div> </div>
+		: <> <Route exact path="/shop/" component={All}/>
+			<Route path="/shop/new" component={New}/>
+			<Route path="/shop/bottoms" component={Bottom}/>
+			<Route exact path="/shop/tops" component={Top}/> </>
+		 }
+            
+				
 			</div>
 
 			
@@ -331,6 +297,9 @@ class Shop extends Component{
 		</div>
 	</section>
 
+
+				
+                
             </>
         )
     }

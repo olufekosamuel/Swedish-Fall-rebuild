@@ -1,28 +1,33 @@
-import img1 from '../assets/images/product-01.jpg';
-import img2 from '../assets/images/product-02.jpg';
-import img3 from '../assets/images/product-03.jpg';
-import img4 from '../assets/images/product-04.jpg';
-import img5 from '../assets/images/product-05.jpg';
-import img6 from '../assets/images/product-06.jpg';
-import img7 from '../assets/images/product-07.jpg';
-import img8 from '../assets/images/product-08.jpg';
+import img1 from '../assets/images/prod1.jpg';
+import img2 from '../assets/images/prod2.jpg';
+import img3 from '../assets/images/prod3.jpg';
+import img4 from '../assets/images/prod4.jpg';
+import img5 from '../assets/images/prod5.jpg';
+import img6 from '../assets/images/prod6.jpg';
+import img7 from '../assets/images/prod7.jpg';
+import img8 from '../assets/images/prod8.jpg';
+import img9 from '../assets/images/prod9.jpg';
+import img10 from '../assets/images/prod10.jpg';
 import { ADD_TO_CART, REMOVE_ITEM, ADD_QUANTITY, SUB_QUANTITY } from '../actions/types';
 
 
 const initialState = {
     items: [
-        {id:1,name:'Esprit Ruffle Shirt', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.", price:16.64,img:img1},
-        {id:2,name:'Herschel supply', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.", price:35.31,img: img2},
-        {id:3,name:'Only Check Trouser', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",price:25.50,img: img3},
-        {id:4,name:'classNameic Trench Coat', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.", price:75.00,img:img4},
-        {id:5,name:'Front Pocket Jumper', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.", price:34.75,img: img5},
-        {id:6,name:'Vintage Inspired classNameic', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",price:93.20,img: img6},
-        {id:7,name:'Shirt in Stretch Cotton', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",price:52.66,img: img7},
-        {id:8,name:'Pieces Metallic Printed', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",price:18.96,img: img8}
+        {id:1,name:'CANDY BIKER SHORTS', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.", price:37,img:img1,category:['Bottoms','New']},
+        {id:2,name:'CANDY CURVED TIGHTS', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.", price:62,img: img2, category:['Bottoms','New']},
+        {id:3,name:'CANDY CURVED TIGHTS', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",price:62,img: img3, category:['Bottoms','New']},
+        {id:4,name:'CANDY CURVED TIGHTS', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.", price:62,img:img4, category:['Bottoms']},
+        {id:5,name:'CANDY SPORTS BRA', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.", price:37,img: img5, category:['Tops','New']},
+        {id:6,name:'CANDY RUNNING HOODY', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",price:50,img: img6,category:['Tops','New']},
+        {id:7,name:'CANDY CURVED TIGHTS', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",price:37,img: img7,category:['Bottoms','New']},
+        {id:8,name:'CANDY CURVED TIGHTS', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",price:62,img: img8, category:['Bottoms']},
+        {id:9,name:'CANDY RUNNING HOODY', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",price:62,img: img9,category:['Tops','New']},
+        {id:10,name:'CANDY SPORTS BRA', desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ex.",price:37,img: img10, category:['Tops','New']},
     ],
     addedItems:[],
     total: 0
 }
+
 
 const cartReducer= (state = initialState,action)=>{
     if(action.type === ADD_TO_CART){
@@ -32,7 +37,7 @@ const cartReducer= (state = initialState,action)=>{
         if(existed_item)
         {
           addedItem.quantity += 1 
-          console.log(addedItem);
+          localStorage.setItem('addedItem',JSON.stringify(addedItem))
            return{
               ...state,
                total: state.total + addedItem.price 
@@ -57,7 +62,7 @@ const cartReducer= (state = initialState,action)=>{
         
         //calculating the total
         let newTotal = state.total - (itemToRemove.price * itemToRemove.quantity )
-        console.log(itemToRemove)
+        localStorage.setItem('addedItem',JSON.stringify(new_items))
         return{
             ...state,
             addedItems: new_items,
@@ -68,6 +73,7 @@ const cartReducer= (state = initialState,action)=>{
         let addedItem = state.items.find(item=> item.id === action.id)
           addedItem.quantity += 1 
           let newTotal = state.total + addedItem.price
+          localStorage.setItem('addedItem',JSON.stringify(addedItem))
           return{
               ...state,
               total: newTotal
@@ -79,6 +85,7 @@ const cartReducer= (state = initialState,action)=>{
         if(addedItem.quantity === 1){
             let new_items = state.addedItems.filter(item=>item.id !== action.id)
             let newTotal = state.total - addedItem.price
+            localStorage.setItem('addedItem',JSON.stringify(new_items))
             return{
                 ...state,
                 addedItems: new_items,
